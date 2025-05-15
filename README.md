@@ -40,9 +40,10 @@ properties
     spring.datasource.username=tu_usuario
     spring.datasource.password=tu_contraseña
     spring.jpa.hibernate.ddl-auto=update
+    spring.redis.host=localhost
+    spring.redis.port=6379
 ```
-spring.redis.host=localhost
-spring.redis.port=6379
+
 3. Ejecuta el proyecto:
   ```bash
     ./mvnw spring-boot:run
