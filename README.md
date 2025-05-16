@@ -56,3 +56,7 @@ Nombre  |  Rol          |	Tareas asignadas
 - Dev 4	| Backend	      | Pedidos y pagos
 - Dev 5	| Backend	      | Reseñas, validaciones y testing
 - Dev 6	| Infra	        | Configuración, Redis, documentación, integración frontend
+
+
+### Autentificacion
+Mas informacion en el documento de [Autentificacion](md/Autentificacion.md)
