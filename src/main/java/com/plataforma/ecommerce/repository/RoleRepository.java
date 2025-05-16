@@ -1,6 +1,6 @@
 package com.plataforma.ecommerce.repository;
 
-import com.bugapunks.ecommerce.model.entity.Role;
+import com.plataforma.ecommerce.model.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
