@@ -1,14 +1,14 @@
 package com.plataforma.ecommerce.controller;
 
-import com.bugapunks.ecommerce.model.dto.AuthDTO.JwtResponse;
-import com.bugapunks.ecommerce.model.dto.AuthDTO.LoginRequest;
-import com.bugapunks.ecommerce.model.dto.AuthDTO.MessageResponse;
-import com.bugapunks.ecommerce.model.dto.AuthDTO.SignupRequest;
-import com.bugapunks.ecommerce.model.entity.Role;
-import com.bugapunks.ecommerce.model.entity.User;
-import com.bugapunks.ecommerce.repository.RoleRepository;
-import com.bugapunks.ecommerce.repository.UserRepository;
-import com.bugapunks.ecommerce.security.jwt.JwtUtils;
+import com.plataforma.ecommerce.dto.AuthDTO.JwtResponse;
+import com.plataforma.ecommerce.dto.AuthDTO.LoginRequest;
+import com.plataforma.ecommerce.dto.AuthDTO.MessageResponse;
+import com.plataforma.ecommerce.dto.AuthDTO.SignupRequest;
+import com.plataforma.ecommerce.model.entity.Role;
+import com.plataforma.ecommerce.model.entity.User;
+import com.plataforma.ecommerce.repository.RoleRepository;
+import com.plataforma.ecommerce.repository.UserRepository;
+import com.plataforma.ecommerce.security.jwt.JwtUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
