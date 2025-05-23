@@ -1,6 +1,8 @@
 package com.plataforma.ecommerce.model;
-import java.time.LocalDate;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,47 +10,35 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 
 @Entity
-@Table(name = "producto")
+@Table(name = "categoria")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
-public class Producto {
-     @Id
+public class Categoria {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
+    @Column(name = "id_categoria")
     private Long id;
 
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
-    private LocalDate anioingreso;
-
     private String descripcion;
 
-    @Column(nullable = false)
-    private int stock;
-
-    @Column(nullable = false)
-    private int stock_minimo;
-
-    @Column(nullable = false)
-    private String unidad_medida;
-
     @ManyToOne
-    @JoinColumn(name = "id_categoria", nullable = false)
-    private Categoria categoria;
-}
+    @JoinColumn(name = "id_catalogo", nullable = false)
+    private Catalogo catalogo;
 
-    
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Producto> productos;
+   
+}
