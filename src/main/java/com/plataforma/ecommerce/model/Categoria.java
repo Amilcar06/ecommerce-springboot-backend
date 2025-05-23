@@ -38,7 +38,7 @@ public class Categoria {
     @JoinColumn(name = "id_catalogo", nullable = false)
     private Catalogo catalogo;
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Producto> productos;
    
 }
