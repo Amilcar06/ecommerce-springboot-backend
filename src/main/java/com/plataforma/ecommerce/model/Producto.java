@@ -1,6 +1,4 @@
 package com.plataforma.ecommerce.model;
-
-import java.sql.Date;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -46,12 +44,11 @@ public class Producto {
     private int stock_minimo;
 
     @Column(nullable = false)
-    private int unidad_medida;
+    private String unidad_medida;
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
-    private Catalogo catalogo;
+    private Categoria categoria;
 }
 
     
-

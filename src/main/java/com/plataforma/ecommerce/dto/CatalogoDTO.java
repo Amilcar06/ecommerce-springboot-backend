@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductoDTO {
+ 
+
+public class CatalogoDTO {
     private Long id;
     private String nombre;
-    private LocalDate aniosingreso;
     private String description;
-    private int stock;
-    private int stock_minimo;
-    private String unidad_medida;
-    private Long idCategoria;
+    private LocalDate fecha;
 }
