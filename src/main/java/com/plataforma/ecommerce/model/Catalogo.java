@@ -1,6 +1,7 @@
 package com.plataforma.ecommerce.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -36,7 +37,7 @@ public class Catalogo {
     @Column(nullable = false)
     private String descripcion;
     @Column(nullable = false)
-    private Date fecha;
+    private LocalDate fecha;
 
     //@One To Many 
     //@Many To One

@@ -1,6 +1,7 @@
 package com.plataforma.ecommerce.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +35,7 @@ public class Producto {
     private String nombre;
 
     @Column(nullable = false)
-    private Date aniodeongreso;
+    private LocalDate anioingreso;
 
     private String descripcion;
 
