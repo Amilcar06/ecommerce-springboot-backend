@@ -46,6 +46,11 @@ public class Producto {
     @Column(nullable = false)
     private String unidad_medida;
 
+    @Column(nullable = false)
+    private double precio;
+
+
+
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria categoria;
