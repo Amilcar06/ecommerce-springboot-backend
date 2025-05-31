@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,6 +18,7 @@ import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHtt
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @EnableJdbcHttpSession
 public class SecurityConfig {
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
@@ -52,6 +54,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers("/api/vendedores/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_VENDEDOR")
                 .requestMatchers("/api/usuarios/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_VENDEDOR", "ROLE_USUARIO")
+                .requestMatchers("/api/profile/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_VENDEDOR", "ROLE_USUARIO")
                 .anyRequest().authenticated()
             );
 

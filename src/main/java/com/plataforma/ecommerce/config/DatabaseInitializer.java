@@ -63,12 +63,12 @@ public class DatabaseInitializer implements CommandLineRunner {
 
             Set<Role> roles = new HashSet<>();
             Role adminRole = roleRepository.findByName(Role.RoleName.ROLE_ADMIN)
-                    .orElseThrow(() -> new RuntimeException("Error: Role not found."));
+                    .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
             roles.add(adminRole);
             admin.setRoles(roles);
 
             userRepository.save(admin);
-            System.out.println("Admin user created: admin / admin123");
+            System.out.println("Usuario admin creado: admin / admin123");
         }
     }
 }
