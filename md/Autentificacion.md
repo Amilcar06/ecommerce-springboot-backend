@@ -153,7 +153,7 @@ Estos endpoints permiten a los usuarios autenticados gestionar su información p
     *   **Response Body (Error - 400 Bad Request):** Si los datos no cumplen las validaciones o si el username/email ya están en uso.
     *   **Response Body (Error - 401 Unauthorized):** Si no se proporciona un token o es inválido.
 
-*   **`PUT /api/profile/change-password`**
+*   **`POST /api/profile/change-password`**
     *   **Descripción:** Cambia la contraseña del usuario autenticado. Requiere la contraseña actual para verificación.
     *   **Headers:** `Authorization: Bearer <your_jwt_token>`
     *   **Request Body:** `application/json` (Ver `AuthDTO.ChangePasswordRequest`)
@@ -185,6 +185,49 @@ La `SecurityConfig.java` define las reglas de acceso a diferentes rutas basadas 
 *   `/api/profile/**`: Requiere los roles `ROLE_ADMIN`, `ROLE_VENDEDOR` o `ROLE_USUARIO`.
 *   Cualquier otra ruta (`anyRequest()`): **Requiere autenticación** (un JWT válido).
 
+### 4.1 Endpoints de Administración de Usuarios
+
+Los siguientes endpoints están disponibles para la gestión de usuarios por parte de administradores:
+
+*   **`GET /api/admin/usuarios`**
+    *   **Descripción:** Obtiene la lista de todos los usuarios registrados en el sistema.
+    *   **Acceso:** Solo usuarios con rol `ROLE_ADMIN`.
+    *   **Response Body (Success - 200 OK):** Lista de usuarios con sus detalles.
+
+*   **`GET /api/admin/usuarios/{id}`**
+    *   **Descripción:** Obtiene los detalles de un usuario específico por su ID.
+    *   **Acceso:** Solo usuarios con rol `ROLE_ADMIN`.
+    *   **Response Body (Success - 200 OK):** Detalles del usuario.
+    *   **Response Body (Error - 404 Not Found):** Si el usuario no existe.
+
+*   **`PATCH /api/admin/usuarios/{id}/active`**
+    *   **Descripción:** Activa o desactiva un usuario.
+    *   **Acceso:** Solo usuarios con rol `ROLE_ADMIN`.
+    *   **Request Param:** `active` (boolean) - Estado de activación.
+    *   **Response Body (Success - 200 OK):** Mensaje de éxito.
+    *   **Response Body (Error - 404 Not Found):** Si el usuario no existe.
+
+*   **`POST /api/admin/usuarios/vendedores`**
+    *   **Descripción:** Crea un nuevo usuario con rol de vendedor.
+    *   **Acceso:** Solo usuarios con rol `ROLE_ADMIN`.
+    *   **Request Body:** `application/json` (Ver `AuthDTO.CreateVendedorRequest`)
+        ```json
+        {
+          "username": "string",    // Requerido: Mínimo 3, máximo 20 caracteres
+          "email": "string",       // Requerido: Formato email válido, máximo 50 caracteres
+          "password": "string",    // Requerido: Mínimo 6, máximo 40 caracteres
+          "firstName": "string",   // Opcional: Máximo 50 caracteres
+          "lastName": "string"     // Opcional: Máximo 50 caracteres
+        }
+        ```
+    *   **Response Body (Success - 200 OK):** Detalles del vendedor creado.
+    *   **Response Body (Error - 400 Bad Request):** Si los datos no cumplen las validaciones o si el username/email ya están en uso.
+
+*   **`GET /api/admin/usuarios/vendedores`**
+    *   **Descripción:** Obtiene la lista de todos los usuarios con rol de vendedor.
+    *   **Acceso:** Solo usuarios con rol `ROLE_ADMIN`.
+    *   **Response Body (Success - 200 OK):** Lista de vendedores con sus detalles.
+
 ## 5. Data Transfer Objects (DTOs) de Autenticación y Perfiles
 
 Los DTOs se utilizan para estructurar los datos de entrada y salida de los endpoints de autenticación y gestión de perfiles (Ver `AuthDTO.java`).
@@ -202,6 +245,13 @@ Los DTOs se utilizan para estructurar los datos de entrada y salida de los endpo
     *   `firstName`: `string` (Opcional)
     *   `lastName`: `string` (Opcional)
     *   `roles`: `Set<String>` (Opcional, ej: ["admin", "vendedor", "usuario"])
+
+*   **`CreateVendedorRequest`**
+    *   `username`: `string` (Requerido, min 3, max 20)
+    *   `email`: `string` (Requerido, formato email, max 50)
+    *   `password`: `string` (Requerido, min 6, max 40)
+    *   `firstName`: `string` (Opcional, max 50)
+    *   `lastName`: `string` (Opcional, max 50)
 
 *   **`JwtResponse`**
     *   `token`: `string` (El token JWT)
@@ -259,6 +309,53 @@ Los DTOs se utilizan para estructurar los datos de entrada y salida de los endpo
        })
      });
      return await response.json();
+   };
+   ```
+
+### Administración de Usuarios (Solo para Administradores)
+
+1. **Crear un Nuevo Vendedor**
+   ```javascript
+   const createVendedor = async (vendedorData) => {
+     const token = localStorage.getItem('authToken');
+     const response = await fetch('http://localhost:8080/api/admin/usuarios/vendedores', {
+       method: 'POST',
+       headers: {
+         'Authorization': `Bearer ${token}`,
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({
+         username: vendedorData.username,
+         email: vendedorData.email,
+         password: vendedorData.password,
+         firstName: vendedorData.firstName,
+         lastName: vendedorData.lastName
+       })
+     });
+     
+     if (response.ok) {
+       return await response.json();
+     }
+     throw new Error('Failed to create vendor');
+   };
+   ```
+
+2. **Obtener Lista de Vendedores**
+   ```javascript
+   const getVendedores = async () => {
+     const token = localStorage.getItem('authToken');
+     const response = await fetch('http://localhost:8080/api/admin/usuarios/vendedores', {
+       method: 'GET',
+       headers: {
+         'Authorization': `Bearer ${token}`,
+         'Content-Type': 'application/json',
+       }
+     });
+     
+     if (response.ok) {
+       return await response.json();
+     }
+     throw new Error('Failed to fetch vendors');
    };
    ```
 
@@ -336,7 +433,7 @@ Los DTOs se utilizan para estructurar los datos de entrada y salida de los endpo
    const changePassword = async (passwordData) => {
      const token = localStorage.getItem('authToken');
      const response = await fetch('http://localhost:8080/api/profile/change-password', {
-       method: 'PUT',
+       method: 'POST',
        headers: {
          'Authorization': `Bearer ${token}`,
          'Content-Type': 'application/json',
@@ -617,7 +714,7 @@ class AuthService {
     required String confirmPassword,
   }) async {
     final token = await _getToken();
-    final response = await http.put(
+    final response = await http.post(
       Uri.parse('$baseUrl/profile/change-password'),
       headers: {
         'Authorization': 'Bearer $token',
@@ -912,6 +1009,6 @@ const ProfileComponent = () => {
 | POST | `/api/auth/logout` | Logout de usuario | Sí |
 | GET | `/api/profile` | Obtener perfil | Sí |
 | PUT | `/api/profile` | Actualizar perfil | Sí |
-| PUT | `/api/profile/change-password` | Cambiar contraseña | Sí |
+| POST | `/api/profile/change-password` | Cambiar contraseña | Sí |
 
 ---

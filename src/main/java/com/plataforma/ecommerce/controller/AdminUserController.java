@@ -1,9 +1,13 @@
 package com.plataforma.ecommerce.controller;
 
+import com.plataforma.ecommerce.dto.AuthDTO.CreateVendedorRequest;
 import com.plataforma.ecommerce.dto.AuthDTO.MessageResponse;
 import com.plataforma.ecommerce.exception.UserProfileException;
+import com.plataforma.ecommerce.model.entity.Role;
 import com.plataforma.ecommerce.model.entity.User;
 import com.plataforma.ecommerce.repository.UserRepository;
+import com.plataforma.ecommerce.service.AdminUserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +24,9 @@ public class AdminUserController {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private AdminUserService adminUserService;
 
     /**
      * Obtiene la lista de todos los usuarios
@@ -89,6 +96,55 @@ public class AdminUserController {
         
         return ResponseEntity.ok(new MessageResponse(
                 "Estado de usuario actualizado correctamente a: " + (active ? "activo" : "inactivo")));
+    }
+    
+    /**
+     * Crea un nuevo usuario con rol de vendedor
+     * @param request Datos del nuevo vendedor
+     * @return Mensaje de éxito
+     */
+    @PostMapping("/vendedores")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> createVendedor(@Valid @RequestBody CreateVendedorRequest request) {
+        User vendedor = adminUserService.createVendedor(request);
+        
+        return ResponseEntity.ok(new UserDetailResponse(
+                vendedor.getId(),
+                vendedor.getUsername(),
+                vendedor.getEmail(),
+                vendedor.getFirstName(),
+                vendedor.getLastName(),
+                vendedor.isActive(),
+                vendedor.getRoles().stream()
+                        .map(role -> role.getName().name())
+                        .collect(Collectors.toSet())
+        ));
+    }
+    
+    /**
+     * Obtiene la lista de todos los vendedores
+     * @return Lista de vendedores
+     */
+    @GetMapping("/vendedores")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<?> getAllVendedores() {
+        List<UserSummaryResponse> vendedores = userRepository.findAll().stream()
+                .filter(user -> user.getRoles().stream()
+                        .anyMatch(role -> role.getName() == Role.RoleName.ROLE_VENDEDOR))
+                .map(user -> new UserSummaryResponse(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getEmail(),
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.isActive(),
+                        user.getRoles().stream()
+                                .map(role -> role.getName().name())
+                                .collect(Collectors.toSet())
+                ))
+                .collect(Collectors.toList());
+        
+        return ResponseEntity.ok(vendedores);
     }
 
     /**

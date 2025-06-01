@@ -48,6 +48,30 @@ public class AuthDTO {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
+    public static class CreateVendedorRequest {
+        @NotBlank(message = "El nombre de usuario es obligatorio")
+        @Size(min = 3, max = 20, message = "El nombre de usuario debe tener entre 3 y 20 caracteres")
+        private String username;
+
+        @NotBlank(message = "El email es obligatorio")
+        @Size(max = 50, message = "El email no debe exceder los 50 caracteres")
+        @Email(message = "Debe proporcionar un email válido")
+        private String email;
+
+        @NotBlank(message = "La contraseña es obligatoria")
+        @Size(min = 6, max = 40, message = "La contraseña debe tener entre 6 y 40 caracteres")
+        private String password;
+
+        @Size(max = 50, message = "El nombre no debe exceder los 50 caracteres")
+        private String firstName;
+        
+        @Size(max = 50, message = "El apellido no debe exceder los 50 caracteres")
+        private String lastName;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class JwtResponse {
         private String token;
         private String type = "Bearer";
