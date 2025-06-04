@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: ecommerce-springboot-backend
+    env: docker
+    plan: free
+    healthCheckPath: /api/public/test
+    buildCommand: ./mvnw package -DskipTests
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://ep-spring-feather-ac95314b-pooler.sa-east-1.aws.neon.tech/ecommerce_db?sslmode=require
+      - key: SPRING_DATASOURCE_USERNAME
+        value: neondb_owner
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: npg_Ju1tmjHM3BVo
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: APP_JWT_SECRET
+        value: QWERTYUIOPASDFGHJKLZXCVBNMQWERTYUIOPASDFGHJKLZXCVBNMQWERTYUIOPASDFGHJKLZXCVBNM
+      - key: APP_JWT_EXPIRATIONMS
+        value: 86400000

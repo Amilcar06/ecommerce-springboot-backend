@@ -1,525 +1,119 @@
-mvn spring-boot:run                                                                                                                                                                                                                                     (base)
-[INFO] Scanning for projects...
-[INFO]
-[INFO] ----------------------< com.plataforma:Ecommerce >----------------------
-[INFO] Building Ecommerce 0.0.1-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO]
-[INFO] >>> spring-boot-maven-plugin:3.4.5:run (default-cli) > test-compile @ Ecommerce >>>
-[INFO]
-[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ Ecommerce ---
-[INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO]
-[INFO] --- maven-compiler-plugin:3.13.0:compile (default-compile) @ Ecommerce ---
-[INFO] Recompiling the module because of changed source code.
-[INFO] Compiling 34 source files with javac [debug parameters release 21] to target/classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR :
-[INFO] -------------------------------------------------------------
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/dto/AuthDTO.java:[12,8] class com.plataforma.ecommerce.dto.AuthDTO clashes with package of same name
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[3,44] cannot find symbol
-  symbol:   class ChangePasswordRequest
-  location: class com.plataforma.ecommerce.dto.AuthDTO
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[5,44] cannot find symbol
-  symbol:   class UpdateProfileRequest
-  location: class com.plataforma.ecommerce.dto.AuthDTO
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[3,44] cannot find symbol
-  symbol:   class ChangePasswordRequest
-  location: class com.plataforma.ecommerce.dto.AuthDTO
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[4,44] cannot find symbol
-  symbol:   class UpdateProfileRequest
-  location: class com.plataforma.ecommerce.dto.AuthDTO
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[56,68] cannot find symbol
-  symbol:   class UpdateProfileRequest
-  location: class com.plataforma.ecommerce.controller.UserProfileController
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[79,65] cannot find symbol
-  symbol:   class ChangePasswordRequest
-  location: class com.plataforma.ecommerce.controller.UserProfileController
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[42,48] cannot find symbol
-  symbol:   class UpdateProfileRequest
-  location: class com.plataforma.ecommerce.service.UserService
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[91,49] cannot find symbol
-  symbol:   class ChangePasswordRequest
-  location: class com.plataforma.ecommerce.service.UserService
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/dto/AuthDTO/ChangePasswordRequest.java:[1,1] package com.plataforma.ecommerce.dto.AuthDTO clashes with class of same name
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/dto/AuthDTO/UpdateProfileRequest.java:[1,1] package com.plataforma.ecommerce.dto.AuthDTO clashes with class of same name
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[39,22] cannot find symbol
-  symbol:   method setName(com.plataforma.ecommerce.model.entity.Role.RoleName)
-  location: variable adminRole of type com.plataforma.ecommerce.model.entity.Role
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[43,25] cannot find symbol
-  symbol:   method setName(com.plataforma.ecommerce.model.entity.Role.RoleName)
-  location: variable vendedorRole of type com.plataforma.ecommerce.model.entity.Role
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[47,24] cannot find symbol
-  symbol:   method setName(com.plataforma.ecommerce.model.entity.Role.RoleName)
-  location: variable usuarioRole of type com.plataforma.ecommerce.model.entity.Role
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[57,18] cannot find symbol
-  symbol:   method setUsername(java.lang.String)
-  location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[58,18] cannot find symbol
-  symbol:   method setPassword(java.lang.String)
-  location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[59,18] cannot find symbol
-  symbol:   method setEmail(java.lang.String)
-  location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[60,18] cannot find symbol
-  symbol:   method setFirstName(java.lang.String)
-  location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[61,18] cannot find symbol
-  symbol:   method setLastName(java.lang.String)
-  location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[62,18] cannot find symbol
-  symbol:   method setActive(boolean)
-  location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[68,18] cannot find symbol
-  symbol:   method setRoles(java.util.Set<com.plataforma.ecommerce.model.entity.Role>)
-  location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[33,29] cannot find symbol
-  symbol:   method getId()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[34,29] cannot find symbol
-  symbol:   method getUsername()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[35,29] cannot find symbol
-  symbol:   method getEmail()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[36,29] cannot find symbol
-  symbol:   method getFirstName()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[37,29] cannot find symbol
-  symbol:   method getLastName()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[38,29] cannot find symbol
-  symbol:   method isActive()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[39,29] cannot find symbol
-  symbol:   method getRoles()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[60,21] cannot find symbol
-  symbol:   method getId()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[61,21] cannot find symbol
-  symbol:   method getUsername()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[62,21] cannot find symbol
-  symbol:   method getEmail()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[63,21] cannot find symbol
-  symbol:   method getFirstName()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[64,21] cannot find symbol
-  symbol:   method getLastName()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[65,21] cannot find symbol
-  symbol:   method isActive()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[66,21] cannot find symbol
-  symbol:   method getRoles()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[87,13] cannot find symbol
-  symbol:   method setActive(boolean)
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[90,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[50,69] cannot find symbol
-  symbol:   method getUsername()
-  location: variable loginRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.LoginRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[50,97] cannot find symbol
-  symbol:   method getPassword()
-  location: variable loginRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.LoginRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[64,21] cannot find symbol
-  symbol:   method getId()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[66,21] cannot find symbol
-  symbol:   method getEmail()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[72,58] cannot find symbol
-  symbol:   method getUsername()
-  location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[75,27] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[78,55] cannot find symbol
-  symbol:   method getEmail()
-  location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[81,27] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[86,39] cannot find symbol
-  symbol:   method getUsername()
-  location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[87,36] cannot find symbol
-  symbol:   method getEmail()
-  location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[88,54] cannot find symbol
-  symbol:   method getPassword()
-  location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[89,40] cannot find symbol
-  symbol:   method getFirstName()
-  location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[90,39] cannot find symbol
-  symbol:   method getLastName()
-  location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[92,45] cannot find symbol
-  symbol:   method getRoles()
-  location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[120,13] cannot find symbol
-  symbol:   method setRoles(java.util.Set<com.plataforma.ecommerce.model.entity.Role>)
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[123,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[140,25] cannot find symbol
-  symbol:   method getId()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[142,25] cannot find symbol
-  symbol:   method getEmail()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[146,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[152,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[40,17] cannot find symbol
-  symbol:   method getId()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[41,17] cannot find symbol
-  symbol:   method getUsername()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[42,17] cannot find symbol
-  symbol:   method getEmail()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[43,17] cannot find symbol
-  symbol:   method getFirstName()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[44,17] cannot find symbol
-  symbol:   method getLastName()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[45,17] cannot find symbol
-  symbol:   method isActive()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[63,24] cannot find symbol
-  symbol:   method getId()
-  location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[64,24] cannot find symbol
-  symbol:   method getUsername()
-  location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[65,24] cannot find symbol
-  symbol:   method getEmail()
-  location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[66,24] cannot find symbol
-  symbol:   method getFirstName()
-  location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[67,24] cannot find symbol
-  symbol:   method getLastName()
-  location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[68,24] cannot find symbol
-  symbol:   method isActive()
-  location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[85,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[57,22] cannot find symbol
-  symbol:   method getEmail()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[95,86] cannot find symbol
-  symbol:   method getPassword()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/exception/GlobalExceptionHandler.java:[35,37] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/exception/GlobalExceptionHandler.java:[41,37] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/exception/GlobalExceptionHandler.java:[47,37] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/exception/GlobalExceptionHandler.java:[53,37] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-  required: no arguments
-  found:    java.lang.String
-  reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/security/service/UserDetailsServiceImpl.java:[27,56] cannot find symbol
-  symbol:   method getRoles()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/security/service/UserDetailsServiceImpl.java:[32,21] cannot find symbol
-  symbol:   method getUsername()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/security/service/UserDetailsServiceImpl.java:[33,21] cannot find symbol
-  symbol:   method getPassword()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/security/service/UserDetailsServiceImpl.java:[34,21] cannot find symbol
-  symbol:   method isActive()
-  location: variable user of type com.plataforma.ecommerce.model.entity.User
-[INFO] 80 errors
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.001 s
-[INFO] Finished at: 2025-05-31T10:16:24-04:00
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project Ecommerce: Compilation failure: Compilation failure:
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/dto/AuthDTO.java:[12,8] class com.plataforma.ecommerce.dto.AuthDTO clashes with package of same name
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[3,44] cannot find symbol
-[ERROR]   symbol:   class ChangePasswordRequest
-[ERROR]   location: class com.plataforma.ecommerce.dto.AuthDTO
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[5,44] cannot find symbol
-[ERROR]   symbol:   class UpdateProfileRequest
-[ERROR]   location: class com.plataforma.ecommerce.dto.AuthDTO
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[3,44] cannot find symbol
-[ERROR]   symbol:   class ChangePasswordRequest
-[ERROR]   location: class com.plataforma.ecommerce.dto.AuthDTO
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[4,44] cannot find symbol
-[ERROR]   symbol:   class UpdateProfileRequest
-[ERROR]   location: class com.plataforma.ecommerce.dto.AuthDTO
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[56,68] cannot find symbol
-[ERROR]   symbol:   class UpdateProfileRequest
-[ERROR]   location: class com.plataforma.ecommerce.controller.UserProfileController
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[79,65] cannot find symbol
-[ERROR]   symbol:   class ChangePasswordRequest
-[ERROR]   location: class com.plataforma.ecommerce.controller.UserProfileController
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[42,48] cannot find symbol
-[ERROR]   symbol:   class UpdateProfileRequest
-[ERROR]   location: class com.plataforma.ecommerce.service.UserService
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[91,49] cannot find symbol
-[ERROR]   symbol:   class ChangePasswordRequest
-[ERROR]   location: class com.plataforma.ecommerce.service.UserService
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/dto/AuthDTO/ChangePasswordRequest.java:[1,1] package com.plataforma.ecommerce.dto.AuthDTO clashes with class of same name
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/dto/AuthDTO/UpdateProfileRequest.java:[1,1] package com.plataforma.ecommerce.dto.AuthDTO clashes with class of same name
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[39,22] cannot find symbol
-[ERROR]   symbol:   method setName(com.plataforma.ecommerce.model.entity.Role.RoleName)
-[ERROR]   location: variable adminRole of type com.plataforma.ecommerce.model.entity.Role
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[43,25] cannot find symbol
-[ERROR]   symbol:   method setName(com.plataforma.ecommerce.model.entity.Role.RoleName)
-[ERROR]   location: variable vendedorRole of type com.plataforma.ecommerce.model.entity.Role
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[47,24] cannot find symbol
-[ERROR]   symbol:   method setName(com.plataforma.ecommerce.model.entity.Role.RoleName)
-[ERROR]   location: variable usuarioRole of type com.plataforma.ecommerce.model.entity.Role
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[57,18] cannot find symbol
-[ERROR]   symbol:   method setUsername(java.lang.String)
-[ERROR]   location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[58,18] cannot find symbol
-[ERROR]   symbol:   method setPassword(java.lang.String)
-[ERROR]   location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[59,18] cannot find symbol
-[ERROR]   symbol:   method setEmail(java.lang.String)
-[ERROR]   location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[60,18] cannot find symbol
-[ERROR]   symbol:   method setFirstName(java.lang.String)
-[ERROR]   location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[61,18] cannot find symbol
-[ERROR]   symbol:   method setLastName(java.lang.String)
-[ERROR]   location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[62,18] cannot find symbol
-[ERROR]   symbol:   method setActive(boolean)
-[ERROR]   location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/config/DatabaseInitializer.java:[68,18] cannot find symbol
-[ERROR]   symbol:   method setRoles(java.util.Set<com.plataforma.ecommerce.model.entity.Role>)
-[ERROR]   location: variable admin of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[33,29] cannot find symbol
-[ERROR]   symbol:   method getId()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[34,29] cannot find symbol
-[ERROR]   symbol:   method getUsername()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[35,29] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[36,29] cannot find symbol
-[ERROR]   symbol:   method getFirstName()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[37,29] cannot find symbol
-[ERROR]   symbol:   method getLastName()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[38,29] cannot find symbol
-[ERROR]   symbol:   method isActive()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[39,29] cannot find symbol
-[ERROR]   symbol:   method getRoles()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[60,21] cannot find symbol
-[ERROR]   symbol:   method getId()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[61,21] cannot find symbol
-[ERROR]   symbol:   method getUsername()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[62,21] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[63,21] cannot find symbol
-[ERROR]   symbol:   method getFirstName()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[64,21] cannot find symbol
-[ERROR]   symbol:   method getLastName()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[65,21] cannot find symbol
-[ERROR]   symbol:   method isActive()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[66,21] cannot find symbol
-[ERROR]   symbol:   method getRoles()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[87,13] cannot find symbol
-[ERROR]   symbol:   method setActive(boolean)
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AdminUserController.java:[90,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[50,69] cannot find symbol
-[ERROR]   symbol:   method getUsername()
-[ERROR]   location: variable loginRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.LoginRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[50,97] cannot find symbol
-[ERROR]   symbol:   method getPassword()
-[ERROR]   location: variable loginRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.LoginRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[64,21] cannot find symbol
-[ERROR]   symbol:   method getId()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[66,21] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[72,58] cannot find symbol
-[ERROR]   symbol:   method getUsername()
-[ERROR]   location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[75,27] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[78,55] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[81,27] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[86,39] cannot find symbol
-[ERROR]   symbol:   method getUsername()
-[ERROR]   location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[87,36] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[88,54] cannot find symbol
-[ERROR]   symbol:   method getPassword()
-[ERROR]   location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[89,40] cannot find symbol
-[ERROR]   symbol:   method getFirstName()
-[ERROR]   location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[90,39] cannot find symbol
-[ERROR]   symbol:   method getLastName()
-[ERROR]   location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[92,45] cannot find symbol
-[ERROR]   symbol:   method getRoles()
-[ERROR]   location: variable signUpRequest of type @jakarta.validation.Valid com.plataforma.ecommerce.dto.AuthDTO.SignupRequest
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[120,13] cannot find symbol
-[ERROR]   symbol:   method setRoles(java.util.Set<com.plataforma.ecommerce.model.entity.Role>)
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[123,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[140,25] cannot find symbol
-[ERROR]   symbol:   method getId()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[142,25] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[146,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/AuthController.java:[152,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[40,17] cannot find symbol
-[ERROR]   symbol:   method getId()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[41,17] cannot find symbol
-[ERROR]   symbol:   method getUsername()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[42,17] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[43,17] cannot find symbol
-[ERROR]   symbol:   method getFirstName()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[44,17] cannot find symbol
-[ERROR]   symbol:   method getLastName()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[45,17] cannot find symbol
-[ERROR]   symbol:   method isActive()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[63,24] cannot find symbol
-[ERROR]   symbol:   method getId()
-[ERROR]   location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[64,24] cannot find symbol
-[ERROR]   symbol:   method getUsername()
-[ERROR]   location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[65,24] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[66,24] cannot find symbol
-[ERROR]   symbol:   method getFirstName()
-[ERROR]   location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[67,24] cannot find symbol
-[ERROR]   symbol:   method getLastName()
-[ERROR]   location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[68,24] cannot find symbol
-[ERROR]   symbol:   method isActive()
-[ERROR]   location: variable updatedUser of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/controller/UserProfileController.java:[85,34] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[57,22] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/service/UserService.java:[95,86] cannot find symbol
-[ERROR]   symbol:   method getPassword()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/exception/GlobalExceptionHandler.java:[35,37] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/exception/GlobalExceptionHandler.java:[41,37] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/exception/GlobalExceptionHandler.java:[47,37] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/exception/GlobalExceptionHandler.java:[53,37] constructor MessageResponse in class com.plataforma.ecommerce.dto.AuthDTO.MessageResponse cannot be applied to given types;
-[ERROR]   required: no arguments
-[ERROR]   found:    java.lang.String
-[ERROR]   reason: actual and formal argument lists differ in length
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/security/service/UserDetailsServiceImpl.java:[27,56] cannot find symbol
-[ERROR]   symbol:   method getRoles()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/security/service/UserDetailsServiceImpl.java:[32,21] cannot find symbol
-[ERROR]   symbol:   method getUsername()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/security/service/UserDetailsServiceImpl.java:[33,21] cannot find symbol
-[ERROR]   symbol:   method getPassword()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] /home/buga/TGZ/ecommerce-springboot-backend/src/main/java/com/plataforma/ecommerce/security/service/UserDetailsServiceImpl.java:[34,21] cannot find symbol
-[ERROR]   symbol:   method isActive()
-[ERROR]   location: variable user of type com.plataforma.ecommerce.model.entity.User
-[ERROR] -> [Help 1]
-[ERROR]
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR]
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+sudo docker-compose up --build                                                                                                                                                                                                                          (base)
+[sudo] contraseña para buga:
+WARN[0000] /home/buga/TGZ/ecommerce-springboot-backend/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
+[+] Building 189.9s (20/20) FINISHED                                                                                                                                                                                                                 docker:default
+ => [app internal] load build definition from Dockerfile                                                                                                                                                                                                       0.0s
+ => => transferring dockerfile: 637B                                                                                                                                                                                                                           0.0s
+ => WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)                                                                                                                                                                                 0.0s
+ => [app internal] load metadata for docker.io/library/eclipse-temurin:21-jre-alpine                                                                                                                                                                           1.7s
+ => [app internal] load metadata for docker.io/library/eclipse-temurin:21-jdk-alpine                                                                                                                                                                           1.6s
+ => [app internal] load .dockerignore                                                                                                                                                                                                                          0.0s
+ => => transferring context: 512B                                                                                                                                                                                                                              0.0s
+ => [app build 1/9] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:2f2f553ce09d25e2d2f0f521ab94cd73f70c9b21327a29149c23a2b63b8e29a0                                                                                                             113.6s
+ => => resolve docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:2f2f553ce09d25e2d2f0f521ab94cd73f70c9b21327a29149c23a2b63b8e29a0                                                                                                                         0.0s
+ => => sha256:d29b21f5b2c17ebc06e9a99b3cfcd3cfc8e8a3fed872fff81641100e99586c42 20.95MB / 20.95MB                                                                                                                                                              14.2s
+ => => sha256:370873e386b22025c28fa9279cae3a1cd222ac243a221679834774d0620fa7f3 157.86MB / 157.86MB                                                                                                                                                           112.1s
+ => => sha256:2f2f553ce09d25e2d2f0f521ab94cd73f70c9b21327a29149c23a2b63b8e29a0 2.68kB / 2.68kB                                                                                                                                                                 0.0s
+ => => sha256:3655e24c29da43f666d6306d16f7b6ae30c9dc10188d52859c8f0f749b650ea7 1.94kB / 1.94kB                                                                                                                                                                 0.0s
+ => => sha256:cd16cdda0a23d8f14343eb230f757804d9c99c15b2120a14fb29c2ca746436aa 4.37kB / 4.37kB                                                                                                                                                                 0.0s
+ => => sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870 3.64MB / 3.64MB                                                                                                                                                                 9.2s
+ => => extracting sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870                                                                                                                                                                      0.1s
+ => => sha256:5bb1def311668c63d0555cfb562a2dc952ee1c071f75d5f1805f7e6383c36365 130B / 130B                                                                                                                                                                     9.4s
+ => => sha256:aa49a465cc24db7df330480bc605cd2f13f785972d1645eeff0397c467e58380 2.28kB / 2.28kB                                                                                                                                                                 9.5s
+ => => extracting sha256:d29b21f5b2c17ebc06e9a99b3cfcd3cfc8e8a3fed872fff81641100e99586c42                                                                                                                                                                      0.4s
+ => => extracting sha256:370873e386b22025c28fa9279cae3a1cd222ac243a221679834774d0620fa7f3                                                                                                                                                                      1.3s
+ => => extracting sha256:5bb1def311668c63d0555cfb562a2dc952ee1c071f75d5f1805f7e6383c36365                                                                                                                                                                      0.0s
+ => => extracting sha256:aa49a465cc24db7df330480bc605cd2f13f785972d1645eeff0397c467e58380                                                                                                                                                                      0.0s
+ => [app internal] load build context                                                                                                                                                                                                                          0.0s
+ => => transferring context: 73.74kB                                                                                                                                                                                                                           0.0s
+ => [app stage-1 1/4] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:8728e354e012e18310faa7f364d00185277dec741f4f6d593af6c61fc0eb15fd                                                                                                            73.1s
+ => => resolve docker.io/library/eclipse-temurin:21-jre-alpine@sha256:8728e354e012e18310faa7f364d00185277dec741f4f6d593af6c61fc0eb15fd                                                                                                                         0.0s
+ => => sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870 3.64MB / 3.64MB                                                                                                                                                                 9.2s
+ => => sha256:8728e354e012e18310faa7f364d00185277dec741f4f6d593af6c61fc0eb15fd 2.68kB / 2.68kB                                                                                                                                                                 0.0s
+ => => sha256:62fa775039897e4420368514ba6c167741f6d45a0de9ff9125bee57e5aca8b75 1.94kB / 1.94kB                                                                                                                                                                 0.0s
+ => => sha256:360e75d7612b35a3a65d4b7f2d5ecd735621389fa5e41dd7f55cb4c27878dc1c 3.98kB / 3.98kB                                                                                                                                                                 0.0s
+ => => extracting sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870                                                                                                                                                                    179.0s
+ => => sha256:f6cd406c8d97cafcb893e824126c17fa19907b2bbc8d759931089e1be1e75750 16.18MB / 16.18MB                                                                                                                                                              31.5s
+ => => sha256:74f6a226ed936757680facf9b217f62a2af16b663a69df8e4b3ece925e27ed2a 53.06MB / 53.06MB                                                                                                                                                              72.3s
+ => => extracting sha256:f6cd406c8d97cafcb893e824126c17fa19907b2bbc8d759931089e1be1e75750                                                                                                                                                                      0.3s
+ => => sha256:e6744199aa66ab985e37e72924f1568a6751afa2c508c42a1b3b945f3a8850a7 126B / 126B                                                                                                                                                                    32.0s
+ => => sha256:cda86626eeb372589c3378d030f4522ba1b0c78ec58b1db87960fa4e5fcd3e34 2.28kB / 2.28kB                                                                                                                                                                32.2s
+ => => extracting sha256:74f6a226ed936757680facf9b217f62a2af16b663a69df8e4b3ece925e27ed2a                                                                                                                                                                      0.7s
+ => => extracting sha256:e6744199aa66ab985e37e72924f1568a6751afa2c508c42a1b3b945f3a8850a7                                                                                                                                                                      0.0s
+ => => extracting sha256:cda86626eeb372589c3378d030f4522ba1b0c78ec58b1db87960fa4e5fcd3e34                                                                                                                                                                      0.0s
+ => [app build 2/9] WORKDIR /workspace/app                                                                                                                                                                                                                     0.3s
+ => [app build 3/9] COPY mvnw .                                                                                                                                                                                                                                0.0s
+ => [app build 4/9] COPY .mvn .mvn                                                                                                                                                                                                                             0.0s
+ => [app build 5/9] COPY pom.xml .                                                                                                                                                                                                                             0.0s
+ => [app build 6/9] COPY src src                                                                                                                                                                                                                               0.0s
+ => [app build 7/9] RUN chmod +x ./mvnw                                                                                                                                                                                                                        0.2s
+ => [app build 8/9] RUN ./mvnw install -DskipTests                                                                                                                                                                                                            73.1s
+ => [app build 9/9] RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)                                                                                                                                                                 0.4s
+ => [app stage-1 2/4] COPY --from=build /workspace/app/target/dependency/BOOT-INF/lib /app/lib                                                                                                                                                                 0.1s
+ => [app stage-1 3/4] COPY --from=build /workspace/app/target/dependency/META-INF /app/META-INF                                                                                                                                                                0.0s
+ => [app stage-1 4/4] COPY --from=build /workspace/app/target/dependency/BOOT-INF/classes /app                                                                                                                                                                 0.0s
+ => [app] exporting to image                                                                                                                                                                                                                                   0.2s
+ => => exporting layers                                                                                                                                                                                                                                        0.2s
+ => => writing image sha256:e784b2bf9cb4bd33f7da3c9bbab7c8d990ca813a2bf24972ed7ffeaa05762d25                                                                                                                                                                   0.0s
+ => => naming to docker.io/library/ecommerce-springboot-backend-app                                                                                                                                                                                            0.0s
+ => [app] resolving provenance for metadata file                                                                                                                                                                                                               0.0s
+[+] Running 3/3
+ ✔ app                                           Built                                                                                                                                                                                                         0.0s
+ ✔ Network ecommerce-springboot-backend_default  Created                                                                                                                                                                                                       0.1s
+ ✔ Container ecommerce-springboot-backend-app-1  Created                                                                                                                                                                                                       0.1s
+Attaching to app-1
+app-1  |
+app-1  |   .   ____          _            __ _ _
+app-1  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+app-1  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+app-1  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+app-1  |   '  |____| .__|_| |_|_| |_\__, | / / / /
+app-1  |  =========|_|==============|___/=/_/_/_/
+app-1  |
+app-1  |  :: Spring Boot ::                (v3.4.5)
+app-1  |
+app-1  | 2025-06-04T16:18:05.791Z  INFO 1 --- [Ecommerce] [           main] c.p.ecommerce.EcommerceApplication       : Starting EcommerceApplication using Java 21.0.7 with PID 1 (/app started by root in /)
+app-1  | 2025-06-04T16:18:05.793Z  INFO 1 --- [Ecommerce] [           main] c.p.ecommerce.EcommerceApplication       : No active profile set, falling back to 1 default profile: "default"
+app-1  | 2025-06-04T16:18:06.453Z  INFO 1 --- [Ecommerce] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+app-1  | 2025-06-04T16:18:06.521Z  INFO 1 --- [Ecommerce] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 2 JPA repository interfaces.
+app-1  | 2025-06-04T16:18:06.901Z  INFO 1 --- [Ecommerce] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+app-1  | 2025-06-04T16:18:06.912Z  INFO 1 --- [Ecommerce] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+app-1  | 2025-06-04T16:18:06.912Z  INFO 1 --- [Ecommerce] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+app-1  | 2025-06-04T16:18:06.942Z  INFO 1 --- [Ecommerce] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+app-1  | 2025-06-04T16:18:06.943Z  INFO 1 --- [Ecommerce] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1118 ms
+app-1  | 2025-06-04T16:18:07.066Z  INFO 1 --- [Ecommerce] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+app-1  | 2025-06-04T16:18:07.108Z  INFO 1 --- [Ecommerce] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+app-1  | 2025-06-04T16:18:07.137Z  INFO 1 --- [Ecommerce] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+app-1  | 2025-06-04T16:18:07.294Z  INFO 1 --- [Ecommerce] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+app-1  | 2025-06-04T16:18:07.309Z  INFO 1 --- [Ecommerce] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+app-1  | 2025-06-04T16:18:09.159Z  INFO 1 --- [Ecommerce] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4aac81ca
+app-1  | 2025-06-04T16:18:09.162Z  INFO 1 --- [Ecommerce] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+app-1  | 2025-06-04T16:18:09.360Z  WARN 1 --- [Ecommerce] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+app-1  | 2025-06-04T16:18:09.566Z  INFO 1 --- [Ecommerce] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+app-1  |        Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+app-1  |        Database driver: undefined/unknown
+app-1  |        Database version: 17.5
+app-1  |        Autocommit mode: undefined/unknown
+app-1  |        Isolation level: undefined/unknown
+app-1  |        Minimum pool size: undefined/unknown
+app-1  |        Maximum pool size: undefined/unknown
+app-1  | 2025-06-04T16:18:10.159Z  INFO 1 --- [Ecommerce] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+app-1  | 2025-06-04T16:18:11.813Z  INFO 1 --- [Ecommerce] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+app-1  | 2025-06-04T16:18:12.115Z  INFO 1 --- [Ecommerce] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+app-1  | 2025-06-04T16:18:12.154Z  WARN 1 --- [Ecommerce] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+app-1  | 2025-06-04T16:18:12.956Z  INFO 1 --- [Ecommerce] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+app-1  | 2025-06-04T16:18:12.968Z  INFO 1 --- [Ecommerce] [           main] c.p.ecommerce.EcommerceApplication       : Started EcommerceApplication in 7.417 seconds (process running for 7.666)
+app-1  | Hibernate:
+app-1  |     select
+app-1  |         count(*)
+app-1  |     from
+app-1  |         roles r1_0
+app-1  | Hibernate:
+app-1  |     select
+app-1  |         u1_0.id
+app-1  |     from
+app-1  |         users u1_0
+app-1  |     where
+app-1  |         u1_0.username=?
+app-1  |     fetch
+app-1  |         first ? rows only
