@@ -1,0 +1,538 @@
+{
+  "info": {
+    "_postman_id": "e8f9a123-4567-89ab-cdef-0123456789ab",
+    "name": "Ecommerce Spring Boot API",
+    "description": "Colección para probar los endpoints de la API del ecommerce",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Autenticación",
+      "description": "Endpoints relacionados con la autenticación de usuarios",
+      "item": [
+        {
+          "name": "Registro de Usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"usuario_test\",\n    \"email\": \"usuario_test@example.com\",\n    \"password\": \"Password123\",\n    \"nombre\": \"Usuario\",\n    \"apellidos\": \"Test\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/signup",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "signup"
+              ]
+            },
+            "description": "Registra un nuevo usuario en el sistema"
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"usuario_test\",\n    \"password\": \"Password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Autentica al usuario y devuelve un token JWT"
+          },
+          "response": []
+        },
+        {
+          "name": "Información de Sesión",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/session-info",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "session-info"
+              ]
+            },
+            "description": "Obtiene información sobre la sesión actual del usuario"
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "Cierra la sesión del usuario"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Perfil de Usuario",
+      "description": "Endpoints relacionados con el perfil del usuario",
+      "item": [
+        {
+          "name": "Obtener Perfil",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "profile"
+              ]
+            },
+            "description": "Obtiene el perfil del usuario autenticado"
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Perfil",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"usuario_actualizado\",\n    \"email\": \"usuario_actualizado@example.com\",\n    \"nombre\": \"Usuario Actualizado\",\n    \"apellidos\": \"Test Actualizado\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "profile"
+              ]
+            },
+            "description": "Actualiza la información del perfil del usuario"
+          },
+          "response": []
+        },
+        {
+          "name": "Cambiar Contraseña",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"oldPassword\": \"Password123\",\n    \"newPassword\": \"NuevaPassword123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/profile/change-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "profile",
+                "change-password"
+              ]
+            },
+            "description": "Cambia la contraseña del usuario"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Administración de Usuarios",
+      "description": "Endpoints para la administración de usuarios (solo para administradores)",
+      "item": [
+        {
+          "name": "Listar Usuarios",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/usuarios",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "usuarios"
+              ]
+            },
+            "description": "Obtiene la lista de todos los usuarios (solo admin)"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Usuario por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/usuarios/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "usuarios",
+                "1"
+              ]
+            },
+            "description": "Obtiene un usuario específico por su ID (solo admin)"
+          },
+          "response": []
+        },
+        {
+          "name": "Activar/Desactivar Usuario",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"active\": false\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/admin/usuarios/1/active",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "usuarios",
+                "1",
+                "active"
+              ]
+            },
+            "description": "Activa o desactiva un usuario (solo admin)"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Vendedor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"vendedor_test\",\n    \"email\": \"vendedor_test@example.com\",\n    \"password\": \"Password123\",\n    \"nombre\": \"Vendedor\",\n    \"apellidos\": \"Test\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/admin/usuarios/vendedores",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "usuarios",
+                "vendedores"
+              ]
+            },
+            "description": "Crea un nuevo usuario con rol de vendedor (solo admin)"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Vendedores",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/usuarios/vendedores",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "usuarios",
+                "vendedores"
+              ]
+            },
+            "description": "Obtiene la lista de todos los vendedores (solo admin)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Endpoints de Prueba",
+      "description": "Endpoints para probar los diferentes niveles de acceso",
+      "item": [
+        {
+          "name": "Test Público",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/public/test",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "public",
+                "test"
+              ]
+            },
+            "description": "Endpoint de prueba accesible públicamente"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Usuario",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/usuarios/test",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "usuarios",
+                "test"
+              ]
+            },
+            "description": "Endpoint de prueba accesible para usuarios autenticados"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Vendedor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/vendedores/test",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vendedores",
+                "test"
+              ]
+            },
+            "description": "Endpoint de prueba accesible para vendedores"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/test",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "test"
+              ]
+            },
+            "description": "Endpoint de prueba accesible para administradores"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Capturar automáticamente el token JWT después del login",
+          "if (pm.response.code === 200 && pm.request.url.toString().includes('/api/auth/login')) {",
+          "    var jsonData = pm.response.json();",
+          "    if (jsonData.token) {",
+          "        pm.environment.set('token', jsonData.token);",
+          "        console.log('Token JWT guardado en la variable de entorno');",
+          "    }",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
