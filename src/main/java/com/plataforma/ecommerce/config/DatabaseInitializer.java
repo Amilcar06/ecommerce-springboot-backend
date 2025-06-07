@@ -1,8 +1,8 @@
 package com.plataforma.ecommerce.config;
 
 
-import com.plataforma.ecommerce.model.entity.Role;
 import com.plataforma.ecommerce.model.entity.User;
+import com.plataforma.ecommerce.model.entity.Role;
 import com.plataforma.ecommerce.repository.RoleRepository;
 import com.plataforma.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,12 +63,12 @@ public class DatabaseInitializer implements CommandLineRunner {
 
             Set<Role> roles = new HashSet<>();
             Role adminRole = roleRepository.findByName(Role.RoleName.ROLE_ADMIN)
-                    .orElseThrow(() -> new RuntimeException("Error: Role not found."));
+                    .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
             roles.add(adminRole);
             admin.setRoles(roles);
 
             userRepository.save(admin);
-            System.out.println("Admin user created: admin / admin123");
+            System.out.println("Usuario admin creado: admin / admin123");
         }
     }
 }

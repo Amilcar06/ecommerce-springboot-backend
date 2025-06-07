@@ -1,10 +1,11 @@
 package com.plataforma.ecommerce.dto;
 
 import com.plataforma.ecommerce.model.Pedido;
-import com.plataforma.ecommerce.model.PedidoDetalle;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,8 +17,15 @@ import java.util.stream.Collectors;
 public class PedidoDTO {
 
     private Long id;
+
+    @NotNull(message = "La fecha del pedido es obligatoria")
     private LocalDateTime fecha;
+
+    @NotNull(message = "El ID del usuario es obligatorio")
     private Long usuarioId;
+
+    @NotEmpty(message = "Debe haber al menos un detalle de pedido")
+    @Valid
     private List<PedidoDetalleDTO> detalles;
 
     public static PedidoDTO fromEntity(Pedido pedido) {
