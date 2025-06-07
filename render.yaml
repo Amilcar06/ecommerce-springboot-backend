@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: ecommerce-api
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://ep-little-haze-acl5496s-pooler.sa-east-1.aws.neon.tech/ecommerce_db?sslmode=require
+      - key: SPRING_DATASOURCE_USERNAME
+        value: ecommerce_db_owner
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: npg_bXrIciMQR70t
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: SPRING_JPA_SHOW_SQL
+        value: false
+      - key: SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL
+        value: false
+      - key: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+        value: org.hibernate.dialect.PostgreSQLDialect
+      - key: APP_JWTSECRET
+        value: QWERTYUIOPASDFGHJKLZXCVBNMQWERTYUIOPASDFGHJKLZXCVBNMQWERTYUIOPASDFGHJKLZXCVBNM
+      - key: APP_JWTEXPIRATIONMS
+        value: 86400000
+      - key: SERVER_PORT
+        value: 10000
+      - key: SPRINGDOC_API_DOCS_ENABLED
+        value: true
+      - key: SPRINGDOC_SWAGGER_UI_ENABLED
+        value: true
+      - key: SPRINGDOC_SWAGGER_UI_PATH
+        value: /swagger-ui.html
+      - key: SPRING_SESSION_STORE_TYPE
+        value: jdbc
+      - key: SPRING_SESSION_JDBC_INITIALIZE_SCHEMA
+        value: always
+      - key: SPRING_SESSION_TIMEOUT
+        value: 3600

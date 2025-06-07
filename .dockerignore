@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Archivos de construcción
+target/
+!target/*.jar
+
+# Logs
+logs/
+*.log
+
+# Archivos de IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de Docker
+.dockerignore
+docker-compose.yml
+
+# Otros
+README.md
+LICENSE
