@@ -2,6 +2,7 @@ package com.plataforma.ecommerce.controller;
 
 import com.plataforma.ecommerce.dto.AgregarProductoDTO;
 import com.plataforma.ecommerce.dto.CarritoDTO;
+import com.plataforma.ecommerce.model.Usuario;
 import com.plataforma.ecommerce.security.service.SecurityService;
 import com.plataforma.ecommerce.service.ICarritoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +25,20 @@ public class CarritoController {
     private final ICarritoService carritoService;
     private final SecurityService securityService;
 
-    @Operation(summary = "Obtener carrito del usuario", security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Obtener carrito del usuario autenticado", security = @SecurityRequirement(name = "bearerAuth"))
+    @GetMapping
+    @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<CarritoDTO> obtenerCarritoUsuarioAutenticado() {
+        // Obtener el usuario autenticado
+        Usuario usuario = securityService.obtenerUsuarioAutenticado();
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+        return ResponseEntity.ok(carritoService.obtenerCarritoPorUsuario(usuario.getId()));
+    }
+
+    @Operation(summary = "Obtener carrito del usuario por ID (para compatibilidad)", security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/{usuarioId}")
     @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<CarritoDTO> obtenerCarritoUsuario(@PathVariable Long usuarioId) {
@@ -36,7 +50,21 @@ public class CarritoController {
         return ResponseEntity.ok(carritoService.obtenerCarritoPorUsuario(usuarioId));
     }
 
-    @Operation(summary = "Agregar producto al carrito", security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Agregar producto al carrito del usuario autenticado", security = @SecurityRequirement(name = "bearerAuth"))
+    @PostMapping("/agregar")
+    @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> agregarProductoAutenticado(@RequestBody @Valid AgregarProductoDTO dto) {
+        // Obtener el usuario autenticado
+        Usuario usuario = securityService.obtenerUsuarioAutenticado();
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+        carritoService.agregarProductoAlCarritoDeUsuario(usuario.getId(), dto.getProductoId(), dto.getCantidad());
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Agregar producto al carrito por ID de usuario (para compatibilidad)", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("/{usuarioId}/agregar")
     @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> agregarProducto(
@@ -52,7 +80,21 @@ public class CarritoController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "Quitar producto del carrito", security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Quitar producto del carrito del usuario autenticado", security = @SecurityRequirement(name = "bearerAuth"))
+    @DeleteMapping("/quitar/{productoId}")
+    @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> quitarProductoAutenticado(@PathVariable Long productoId) {
+        // Obtener el usuario autenticado
+        Usuario usuario = securityService.obtenerUsuarioAutenticado();
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+        carritoService.eliminarProductoDelCarritoDeUsuario(usuario.getId(), productoId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Quitar producto del carrito por ID de usuario (para compatibilidad)", security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/{usuarioId}/quitar/{productoId}")
     @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> quitarProducto(
@@ -68,7 +110,21 @@ public class CarritoController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "Vaciar carrito", security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Vaciar carrito del usuario autenticado", security = @SecurityRequirement(name = "bearerAuth"))
+    @DeleteMapping("/vaciar")
+    @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> vaciarCarritoAutenticado() {
+        // Obtener el usuario autenticado
+        Usuario usuario = securityService.obtenerUsuarioAutenticado();
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+        carritoService.vaciarCarritoDeUsuario(usuario.getId());
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Vaciar carrito por ID de usuario (para compatibilidad)", security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/{usuarioId}/vaciar")
     @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> vaciarCarrito(@PathVariable Long usuarioId) {

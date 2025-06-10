@@ -2,8 +2,8 @@ package com.plataforma.ecommerce.security.service;
 
 import com.plataforma.ecommerce.model.Usuario;
 import com.plataforma.ecommerce.model.entity.User;
-import com.plataforma.ecommerce.repository.UsuarioRepository;
 import com.plataforma.ecommerce.security.jwt.JwtUtils;
+import com.plataforma.ecommerce.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SecurityService {
 
-    private final UsuarioRepository usuarioRepository;
+    private final IUserService userService;
     private final JwtUtils jwtUtils;
 
     /**
@@ -65,9 +65,12 @@ public class SecurityService {
      * @return ID del usuario de negocio
      */
     public Long obtenerUsuarioIdPorUserId(Long userId) {
-        return usuarioRepository.findByUserId(userId)
-                .map(Usuario::getId)
-                .orElse(null);
+        try {
+            Usuario usuario = userService.getUsuarioByUserId(userId);
+            return usuario.getId();
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     /**
@@ -77,11 +80,26 @@ public class SecurityService {
     public Long obtenerUsuarioAutenticadoId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         
-        if (auth == null || !auth.isAuthenticated()) {
+        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
             return null;
         }
         
         UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
         return obtenerUsuarioIdPorUserId(userDetails.getId());
+    }
+    
+    /**
+     * Obtiene el Usuario asociado al usuario autenticado actualmente
+     * @return Usuario asociado o null si no hay usuario autenticado
+     */
+    public Usuario obtenerUsuarioAutenticado() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        
+        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+            return null;
+        }
+        
+        UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
+        return userService.getUsuarioByUserId(userDetails.getId());
     }
 }

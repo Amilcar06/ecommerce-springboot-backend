@@ -2,6 +2,7 @@ package com.plataforma.ecommerce.controller;
 
 import com.plataforma.ecommerce.dto.PedidoDTO;
 import com.plataforma.ecommerce.model.Pedido;
+import com.plataforma.ecommerce.model.Usuario;
 import com.plataforma.ecommerce.model.enums.EstadoPedido;
 import com.plataforma.ecommerce.security.service.SecurityService;
 import com.plataforma.ecommerce.service.IPedidoService;
@@ -27,7 +28,21 @@ public class PedidoController {
     private final IPedidoService pedidoService;
     private final SecurityService securityService;
 
-    @Operation(summary = "Procesar pedido desde carrito del usuario", security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Procesar pedido desde carrito del usuario autenticado", security = @SecurityRequirement(name = "bearerAuth"))
+    @PostMapping
+    @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<PedidoDTO> procesarPedidoAutenticado() {
+        // Obtener el usuario autenticado
+        Usuario usuario = securityService.obtenerUsuarioAutenticado();
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+        Pedido pedido = pedidoService.procesarPedidoDesdeCarritoUsuario(usuario.getId());
+        return ResponseEntity.ok(PedidoDTO.fromEntity(pedido));
+    }
+
+    @Operation(summary = "Procesar pedido desde carrito por ID de usuario (para compatibilidad)", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("/{usuarioId}")
     @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<PedidoDTO> procesarPedido(@PathVariable Long usuarioId) {
@@ -55,7 +70,24 @@ public class PedidoController {
         return ResponseEntity.ok(PedidoDTO.fromEntity(pedido));
     }
 
-    @Operation(summary = "Listar pedidos por usuario", security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Listar pedidos del usuario autenticado", security = @SecurityRequirement(name = "bearerAuth"))
+    @GetMapping
+    @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<List<PedidoDTO>> listarPedidosUsuarioAutenticado() {
+        // Obtener el usuario autenticado
+        Usuario usuario = securityService.obtenerUsuarioAutenticado();
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+        List<Pedido> pedidos = pedidoService.listarPedidosPorUsuario(usuario.getId());
+        List<PedidoDTO> pedidosDTO = pedidos.stream()
+                .map(PedidoDTO::fromEntity)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(pedidosDTO);
+    }
+
+    @Operation(summary = "Listar pedidos por ID de usuario (para compatibilidad)", security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/usuario/{usuarioId}")
     @PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_VENDEDOR') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<PedidoDTO>> listarPedidosPorUsuario(@PathVariable Long usuarioId) {
@@ -90,6 +122,5 @@ public class PedidoController {
             return ResponseEntity.badRequest().build();
         }
     }
-
 }
 

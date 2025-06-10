@@ -1,13 +1,17 @@
 package com.plataforma.ecommerce.controller;
 
 import com.plataforma.ecommerce.dto.ReseniaProductoDTO;
+import com.plataforma.ecommerce.model.Usuario;
 import com.plataforma.ecommerce.service.IReseniaProductoService;
+import com.plataforma.ecommerce.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +23,7 @@ import java.util.List;
 public class ReseniaProductoController {
 
     private final IReseniaProductoService reseniaProductoService;
+    private final IUserService userService;
 
     @Operation(summary = "Listar reseñas de un producto")
     @ApiResponse(responseCode = "200", description = "Reseñas obtenidas correctamente")
@@ -34,19 +39,49 @@ public class ReseniaProductoController {
     })
     @PostMapping
     public ReseniaProductoDTO crear(@PathVariable Long productoId, @Valid @RequestBody ReseniaProductoDTO dto) {
+        // Obtener el usuario autenticado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        
+        // Obtener el Usuario asociado al User autenticado
+        Usuario usuario = userService.getUsuarioByUsername(username);
+        
+        // Establecer el ID del usuario y del producto en el DTO
+        dto.setUsuarioId(usuario.getId());
         dto.setProductoId(productoId);
+        
         return reseniaProductoService.crearResenia(dto);
     }
 
     @Operation(summary = "Actualizar una reseña existente")
     @PutMapping("/{id}")
-    public ReseniaProductoDTO actualizar(@PathVariable Long id, @Valid @RequestBody ReseniaProductoDTO dto) {
+    public ReseniaProductoDTO actualizar(@PathVariable Long productoId, @PathVariable Long id, @Valid @RequestBody ReseniaProductoDTO dto) {
+        // Obtener el usuario autenticado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        
+        // Obtener el Usuario asociado al User autenticado
+        Usuario usuario = userService.getUsuarioByUsername(username);
+        
+        // Establecer el ID del usuario y del producto en el DTO
+        dto.setUsuarioId(usuario.getId());
+        dto.setProductoId(productoId);
+        
         return reseniaProductoService.actualizarResenia(id, dto);
     }
 
     @Operation(summary = "Eliminar una reseña")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
+        // Obtener el usuario autenticado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        
+        // Obtener el Usuario asociado al User autenticado
+        Usuario usuario = userService.getUsuarioByUsername(username);
+        
+        // Verificar que la reseña pertenezca al usuario antes de eliminarla
+        // Esta verificación debería hacerse en el servicio
         reseniaProductoService.eliminarResenia(id);
     }
 }

@@ -3,8 +3,10 @@ package com.plataforma.ecommerce.service.impl;
 import com.plataforma.ecommerce.dto.AuthDTO.ChangePasswordRequest;
 import com.plataforma.ecommerce.dto.AuthDTO.UpdateProfileRequest;
 import com.plataforma.ecommerce.exception.UserProfileException;
+import com.plataforma.ecommerce.model.Usuario;
 import com.plataforma.ecommerce.model.entity.User;
 import com.plataforma.ecommerce.repository.UserRepository;
+import com.plataforma.ecommerce.repository.UsuarioRepository;
 import com.plataforma.ecommerce.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,11 +14,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+
 @Service
 public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -57,7 +64,16 @@ public class UserServiceImpl implements IUserService {
         }
 
         try {
-            return userRepository.save(user);
+            User savedUser = userRepository.save(user);
+            
+            // Actualizar también el Usuario si existe
+            usuarioRepository.findByUserId(user.getId()).ifPresent(usuario -> {
+                usuario.setNombre(user.getFirstName() + " " + user.getLastName());
+                usuario.setEmail(user.getEmail());
+                usuarioRepository.save(usuario);
+            });
+            
+            return savedUser;
         } catch (Exception e) {
             throw new UserProfileException("Error al guardar los cambios del perfil", e);
         }
@@ -83,5 +99,42 @@ public class UserServiceImpl implements IUserService {
         } catch (Exception e) {
             throw new UserProfileException("Error al cambiar la contraseña", e);
         }
+    }
+    
+    @Override
+    public Usuario getUsuarioByUsername(String username) {
+        return usuarioRepository.findByUserUsername(username)
+                .orElseGet(() -> {
+                    // Si no existe, lo creamos automáticamente
+                    User user = getUserByUsername(username);
+                    return createUsuarioForUser(user);
+                });
+    }
+    
+    @Override
+    @Transactional
+    public Usuario createUsuarioForUser(User user) {
+        // Verificar si ya existe un Usuario para este User
+        return usuarioRepository.findByUserId(user.getId())
+                .orElseGet(() -> {
+                    // Crear un nuevo Usuario asociado al User
+                    Usuario nuevoUsuario = new Usuario();
+                    nuevoUsuario.setUser(user);
+                    nuevoUsuario.setNombre(user.getFirstName() + " " + user.getLastName());
+                    nuevoUsuario.setEmail(user.getEmail());
+                    nuevoUsuario.setPedidos(new ArrayList<>());
+                    return usuarioRepository.save(nuevoUsuario);
+                });
+    }
+    
+    @Override
+    public Usuario getUsuarioByUserId(Long userId) {
+        return usuarioRepository.findByUserId(userId)
+                .orElseGet(() -> {
+                    // Si no existe, lo creamos automáticamente
+                    User user = userRepository.findById(userId)
+                            .orElseThrow(() -> new UsernameNotFoundException("User no encontrado con ID: " + userId));
+                    return createUsuarioForUser(user);
+                });
     }
 }

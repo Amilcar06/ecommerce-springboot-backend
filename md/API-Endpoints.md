@@ -46,7 +46,7 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 
 ### Inicio de Sesión
 
-**Endpoint:** `POST /api/auth/signin`
+**Endpoint:** `POST /api/auth/login`
 
 **Descripción:** Autentica a un usuario y devuelve un token JWT.
 
@@ -62,10 +62,55 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 ```json
 {
   "token": "eyJhbGciOiJIUzUxMiJ9...",
+  "type": "Bearer",
   "id": 1,
   "username": "usuario1",
   "email": "usuario1@example.com",
   "roles": ["ROLE_USUARIO"]
+}
+```
+
+### Información de Sesión
+
+**Endpoint:** `GET /api/auth/session-info`
+
+**Descripción:** Obtiene información sobre la sesión actual del usuario autenticado.
+
+**Encabezados requeridos:**
+- Authorization: Bearer {token}
+
+**Respuesta exitosa (usuario autenticado):**
+```json
+{
+  "token": null,
+  "type": "Bearer",
+  "id": 1,
+  "username": "usuario1",
+  "email": "usuario1@example.com",
+  "roles": ["ROLE_USUARIO"]
+}
+```
+
+**Respuesta exitosa (sin sesión activa):**
+```json
+{
+  "message": "No active session"
+}
+```
+
+### Cerrar Sesión
+
+**Endpoint:** `POST /api/auth/logout`
+
+**Descripción:** Cierra la sesión del usuario actual.
+
+**Encabezados requeridos:**
+- Authorization: Bearer {token}
+
+**Respuesta exitosa:**
+```json
+{
+  "message": "Logged out successfully!"
 }
 ```
 
@@ -877,11 +922,20 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 
 ## Carritos
 
-### Obtener Carrito del Usuario
+### Obtener Carrito del Usuario Autenticado
+
+**Endpoint:** `GET /api/carrito`
+
+**Descripción:** Obtiene el carrito del usuario autenticado.
+
+**Encabezados requeridos:**
+- Authorization: Bearer {token}
+
+### Obtener Carrito por ID de Usuario (para compatibilidad)
 
 **Endpoint:** `GET /api/carrito/{usuarioId}`
 
-**Descripción:** Obtiene el carrito de un usuario.
+**Descripción:** Obtiene el carrito de un usuario específico.
 
 **Parámetros de ruta:**
 - usuarioId: ID del usuario
@@ -913,11 +967,20 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 }
 ```
 
-### Agregar Producto al Carrito
+### Agregar Producto al Carrito del Usuario Autenticado
+
+**Endpoint:** `POST /api/carrito/agregar`
+
+**Descripción:** Agrega un producto al carrito del usuario autenticado.
+
+**Encabezados requeridos:**
+- Authorization: Bearer {token}
+
+### Agregar Producto al Carrito por ID de Usuario (para compatibilidad)
 
 **Endpoint:** `POST /api/carrito/{usuarioId}/agregar`
 
-**Descripción:** Agrega un producto al carrito del usuario.
+**Descripción:** Agrega un producto al carrito de un usuario específico.
 
 **Parámetros de ruta:**
 - usuarioId: ID del usuario
@@ -936,11 +999,26 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 **Respuesta exitosa:**
 - Código de estado 200 (OK)
 
-### Quitar Producto del Carrito
+### Quitar Producto del Carrito del Usuario Autenticado
+
+**Endpoint:** `DELETE /api/carrito/quitar/{productoId}`
+
+**Descripción:** Elimina un producto del carrito del usuario autenticado.
+
+**Parámetros de ruta:**
+- productoId: ID del producto a eliminar
+
+**Encabezados requeridos:**
+- Authorization: Bearer {token}
+
+**Respuesta exitosa:**
+- Código de estado 200 (OK)
+
+### Quitar Producto del Carrito por ID de Usuario (para compatibilidad)
 
 **Endpoint:** `DELETE /api/carrito/{usuarioId}/quitar/{productoId}`
 
-**Descripción:** Elimina un producto del carrito del usuario.
+**Descripción:** Elimina un producto del carrito de un usuario específico.
 
 **Parámetros de ruta:**
 - usuarioId: ID del usuario
@@ -952,11 +1030,23 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 **Respuesta exitosa:**
 - Código de estado 200 (OK)
 
-### Vaciar Carrito
+### Vaciar Carrito del Usuario Autenticado
+
+**Endpoint:** `DELETE /api/carrito/vaciar`
+
+**Descripción:** Vacía el carrito del usuario autenticado.
+
+**Encabezados requeridos:**
+- Authorization: Bearer {token}
+
+**Respuesta exitosa:**
+- Código de estado 204 (No Content)
+
+### Vaciar Carrito por ID de Usuario (para compatibilidad)
 
 **Endpoint:** `DELETE /api/carrito/{usuarioId}/vaciar`
 
-**Descripción:** Vacía el carrito del usuario.
+**Descripción:** Vacía el carrito de un usuario específico.
 
 **Parámetros de ruta:**
 - usuarioId: ID del usuario
@@ -969,11 +1059,20 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 
 ## Pedidos
 
-### Procesar Pedido
+### Procesar Pedido del Usuario Autenticado
+
+**Endpoint:** `POST /api/pedidos`
+
+**Descripción:** Procesa un pedido a partir del carrito del usuario autenticado.
+
+**Encabezados requeridos:**
+- Authorization: Bearer {token}
+
+### Procesar Pedido por ID de Usuario (para compatibilidad)
 
 **Endpoint:** `POST /api/pedidos/{usuarioId}`
 
-**Descripción:** Procesa un pedido a partir del carrito del usuario.
+**Descripción:** Procesa un pedido a partir del carrito de un usuario específico.
 
 **Parámetros de ruta:**
 - usuarioId: ID del usuario
@@ -1061,11 +1160,20 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 }
 ```
 
-### Listar Pedidos por Usuario
+### Listar Pedidos del Usuario Autenticado
+
+**Endpoint:** `GET /api/pedidos`
+
+**Descripción:** Obtiene una lista de pedidos del usuario autenticado.
+
+**Encabezados requeridos:**
+- Authorization: Bearer {token}
+
+### Listar Pedidos por ID de Usuario (para compatibilidad)
 
 **Endpoint:** `GET /api/pedidos/usuario/{usuarioId}`
 
-**Descripción:** Obtiene una lista de pedidos de un usuario.
+**Descripción:** Obtiene una lista de pedidos de un usuario específico.
 
 **Parámetros de ruta:**
 - usuarioId: ID del usuario
@@ -1328,13 +1436,12 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 **Cuerpo de la solicitud:**
 ```json
 {
-  "usuarioId": 1,  // IMPORTANTE: Este campo es obligatorio y debe corresponder a un ID de Usuario válido
   "calificacion": 4,
   "comentario": "Muy buen producto, lo recomiendo."
 }
 ```
 
-**Nota importante:** Actualmente existe un problema en la implementación que impide crear reseñas. La aplicación utiliza dos modelos de usuario (`User` para autenticación y `Usuario` para la lógica de negocio), pero no hay una forma automática de crear un `Usuario` asociado al `User` autenticado.
+**Nota:** La aplicación utiliza dos modelos de usuario (`User` para autenticación y `Usuario` para la lógica de negocio). Ahora, cuando un usuario se registra o inicia sesión, se crea automáticamente un `Usuario` asociado al `User` autenticado, por lo que no es necesario proporcionar el `usuarioId` en las solicitudes.
 
 **Respuesta exitosa:**
 ```json
@@ -1384,11 +1491,12 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 
 ### Actualizar Reseña de Producto
 
-**Endpoint:** `PUT /api/resenias/{id}`
+**Endpoint:** `PUT /api/productos/{productoId}/resenias/{id}`
 
 **Descripción:** Actualiza una reseña existente.
 
 **Parámetros de ruta:**
+- productoId: ID del producto
 - id: ID de la reseña
 
 **Encabezados requeridos:**
@@ -1416,11 +1524,12 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 
 ### Eliminar Reseña de Producto
 
-**Endpoint:** `DELETE /api/resenias/{id}`
+**Endpoint:** `DELETE /api/productos/{productoId}/resenias/{id}`
 
 **Descripción:** Elimina una reseña.
 
 **Parámetros de ruta:**
+- productoId: ID del producto
 - id: ID de la reseña a eliminar
 
 **Encabezados requeridos:**
@@ -1478,14 +1587,12 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 **Cuerpo de la solicitud:**
 ```json
 {
-  "usuarioId": 1,  // IMPORTANTE: Este campo es obligatorio y debe corresponder a un ID de Usuario válido
-  "tiendaId": 1,   // IMPORTANTE: Este campo es obligatorio y debe coincidir con el ID en la URL
   "calificacion": 4,
   "comentario": "Buena tienda, envío rápido."
 }
 ```
 
-**Nota importante:** Actualmente existe un problema en la implementación que impide crear reseñas. La aplicación utiliza dos modelos de usuario (`User` para autenticación y `Usuario` para la lógica de negocio), pero no hay una forma automática de crear un `Usuario` asociado al `User` autenticado.
+**Nota:** La aplicación utiliza dos modelos de usuario (`User` para autenticación y `Usuario` para la lógica de negocio). Ahora, cuando un usuario se registra o inicia sesión, se crea automáticamente un `Usuario` asociado al `User` autenticado, por lo que no es necesario proporcionar el `usuarioId` en las solicitudes.
 
 **Respuesta exitosa:**
 ```json

@@ -9,6 +9,7 @@ import com.plataforma.ecommerce.model.entity.User;
 import com.plataforma.ecommerce.repository.RoleRepository;
 import com.plataforma.ecommerce.repository.UserRepository;
 import com.plataforma.ecommerce.security.jwt.JwtUtils;
+import com.plataforma.ecommerce.service.IUserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,9 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+    
+    @Autowired
+    IUserService userService;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -61,6 +65,9 @@ public class AuthController {
 
         User user = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User not found."));
+                
+        // Asegurar que exista un Usuario asociado al User
+        userService.getUsuarioByUserId(user.getId());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 user.getId(),
@@ -120,7 +127,10 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        
+        // Crear automáticamente un Usuario asociado al User
+        userService.createUsuarioForUser(savedUser);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
@@ -132,6 +142,9 @@ public class AuthController {
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             User user = userRepository.findByUsername(userDetails.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User not found."));
+                    
+            // Asegurar que exista un Usuario asociado al User
+            userService.getUsuarioByUserId(user.getId());
 
             Set<String> roles = userDetails.getAuthorities().stream()
                     .map(item -> item.getAuthority())
