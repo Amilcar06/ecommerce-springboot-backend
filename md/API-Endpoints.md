@@ -802,6 +802,7 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 **Cuerpo de la solicitud:**
 ```json
 {
+  "codigoTienda": "TIENDA001",  // IMPORTANTE: Este campo es obligatorio y debe ser único
   "nombre": "Nueva Tienda",
   "descripcion": "Descripción de la nueva tienda",
   "direccion": "Avenida Central 456",
@@ -1314,9 +1315,12 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 
 ### Crear Reseña de Producto
 
-**Endpoint:** `POST /api/resenias`
+**Endpoint:** `POST /api/productos/{productoId}/resenias`
 
 **Descripción:** Crea una reseña para un producto.
+
+**Parámetros de ruta:**
+- productoId: ID del producto
 
 **Encabezados requeridos:**
 - Authorization: Bearer {token}
@@ -1324,11 +1328,13 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 **Cuerpo de la solicitud:**
 ```json
 {
-  "productoId": 1,
+  "usuarioId": 1,  // IMPORTANTE: Este campo es obligatorio y debe corresponder a un ID de Usuario válido
   "calificacion": 4,
   "comentario": "Muy buen producto, lo recomiendo."
 }
 ```
+
+**Nota importante:** Actualmente existe un problema en la implementación que impide crear reseñas. La aplicación utiliza dos modelos de usuario (`User` para autenticación y `Usuario` para la lógica de negocio), pero no hay una forma automática de crear un `Usuario` asociado al `User` autenticado.
 
 **Respuesta exitosa:**
 ```json
@@ -1344,7 +1350,7 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 
 ### Obtener Reseñas por Producto
 
-**Endpoint:** `GET /api/resenias/producto/{productoId}`
+**Endpoint:** `GET /api/productos/{productoId}/resenias`
 
 **Descripción:** Obtiene una lista de reseñas de un producto.
 
@@ -1472,10 +1478,14 @@ Esta documentación proporciona detalles sobre todos los endpoints disponibles e
 **Cuerpo de la solicitud:**
 ```json
 {
+  "usuarioId": 1,  // IMPORTANTE: Este campo es obligatorio y debe corresponder a un ID de Usuario válido
+  "tiendaId": 1,   // IMPORTANTE: Este campo es obligatorio y debe coincidir con el ID en la URL
   "calificacion": 4,
   "comentario": "Buena tienda, envío rápido."
 }
 ```
+
+**Nota importante:** Actualmente existe un problema en la implementación que impide crear reseñas. La aplicación utiliza dos modelos de usuario (`User` para autenticación y `Usuario` para la lógica de negocio), pero no hay una forma automática de crear un `Usuario` asociado al `User` autenticado.
 
 **Respuesta exitosa:**
 ```json
