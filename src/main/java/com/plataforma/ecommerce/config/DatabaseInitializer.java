@@ -31,6 +31,9 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         // Create default admin user if it doesn't exist
         createDefaultAdmin();
+        
+        // Create additional admin user if it doesn't exist
+        createAdditionalAdmin();
     }
 
     private void initializeRoles() {
@@ -69,6 +72,27 @@ public class DatabaseInitializer implements CommandLineRunner {
 
             userRepository.save(admin);
             System.out.println("Usuario admin creado: admin / admin123");
+        }
+    }
+    
+    private void createAdditionalAdmin() {
+        if (!userRepository.existsByUsername("adminUser")) {
+            User admin = new User();
+            admin.setUsername("adminUser");
+            admin.setPassword(passwordEncoder.encode("admin456"));
+            admin.setEmail("admin2@ecommerce.com");
+            admin.setFirstName("Admin");
+            admin.setLastName("Secundario");
+            admin.setActive(true);
+
+            Set<Role> roles = new HashSet<>();
+            Role adminRole = roleRepository.findByName(Role.RoleName.ROLE_ADMIN)
+                    .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+            roles.add(adminRole);
+            admin.setRoles(roles);
+
+            userRepository.save(admin);
+            System.out.println("Usuario admin adicional creado: adminUser / admin456");
         }
     }
 }
