@@ -7,8 +7,12 @@ import com.plataforma.ecommerce.repository.CategoriaRepository;
 import com.plataforma.ecommerce.repository.ProductoRepository;
 import com.plataforma.ecommerce.service.IProductoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +27,12 @@ public class ProductoServiceImpl implements IProductoService {
 
 
     @Override
+    public Page<ProductoDTO> obtenerTodos(Pageable pageable) {
+        return productoRepository.findAll(pageable)
+                .map(this::mapToDto);
+    }
+    
+    @Override
     public List<ProductoDTO> obtenerTodos() {
         return productoRepository.findAll()
                 .stream()
@@ -31,6 +41,12 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
+    public Page<ProductoDTO> obtenerPorCategoria(Long categoriaId, Pageable pageable) {
+        return productoRepository.findByCategoriaId(categoriaId, pageable)
+                .map(this::mapToDto);
+    }
+    
+    @Override
     public List<ProductoDTO> obtenerPorCategoria(Long categoriaId) {
         return productoRepository.findByCategoriaId(categoriaId)
                 .stream()
@@ -38,6 +54,12 @@ public class ProductoServiceImpl implements IProductoService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Page<ProductoDTO> obtenerPorTienda(Long tiendaId, Pageable pageable) {
+        return productoRepository.findByCategoria_Tienda_Id(tiendaId, pageable)
+                .map(this::mapToDto);
+    }
+    
     @Override
     public List<ProductoDTO> obtenerPorTienda(Long tiendaId) {
         return productoRepository.findByCategoria_Tienda_Id(tiendaId)
@@ -83,20 +105,37 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
+    @Transactional
     public ProductoDTO actualizarProducto(Long id, ProductoDTO dto) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-
+        
+        // Guardar el precio original para verificar si cambió
+        BigDecimal precioOriginal = producto.getPrecio();
+        
         producto.setNombre(dto.getNombre());
         producto.setDescripcion(dto.getDescripcion());
-        producto.setPrecio(dto.getPrecio());
+        
+        // Verificar si el precio ha cambiado
+        if (precioOriginal.compareTo(dto.getPrecio()) != 0) {
+            // Aquí se podría implementar una lógica para verificar si hay pedidos pendientes
+            // que dependan de este producto y tomar una decisión sobre si permitir el cambio
+            // o crear un registro histórico de precios
+            producto.setPrecio(dto.getPrecio());
+        }
+        
+        // Actualizar stock con validación
+        if (dto.getStock() < 0) {
+            throw new IllegalArgumentException("El stock no puede ser negativo");
+        }
         producto.setStock(dto.getStock());
+        
         producto.setEstado(dto.getEstado());
 
         // Solo actualiza la categoría si se envía otra
         if (!producto.getCategoria().getId().equals(dto.getCategoriaId())) {
-            Categoria categoria = new Categoria();
-            categoria.setId(dto.getCategoriaId());
+            Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
+                    .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
             producto.setCategoria(categoria);
         }
 

@@ -2,9 +2,14 @@ package com.plataforma.ecommerce.controller;
 
 import com.plataforma.ecommerce.dto.ProductoDTO;
 import com.plataforma.ecommerce.service.IProductoService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,22 +24,65 @@ public class ProductoController {
 
     private final IProductoService productoService;
 
-    // GET /api/productos
+    @Operation(summary = "Obtener todos los productos con paginación")
     @GetMapping
-    public List<ProductoDTO> obtenerTodosLosProductos() {
+    public Page<ProductoDTO> obtenerTodosLosProductos(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String direction
+    ) {
+        Sort.Direction sortDirection = direction.equalsIgnoreCase("desc") ? 
+                Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+        return productoService.obtenerTodos(pageable);
+    }
+    
+    @Operation(summary = "Obtener todos los productos sin paginación (para compatibilidad)")
+    @GetMapping("/all")
+    public List<ProductoDTO> obtenerTodosLosProductosSinPaginacion() {
         return productoService.obtenerTodos();
     }
 
-
-    // GET /api/tiendas/{id}/productos
+    @Operation(summary = "Obtener productos por tienda con paginación")
     @GetMapping("/tienda/{tiendaId}")
-    public List<ProductoDTO> obtenerPorTienda(@PathVariable Long tiendaId) {
+    public Page<ProductoDTO> obtenerPorTienda(
+            @PathVariable Long tiendaId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String direction
+    ) {
+        Sort.Direction sortDirection = direction.equalsIgnoreCase("desc") ? 
+                Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+        return productoService.obtenerPorTienda(tiendaId, pageable);
+    }
+    
+    @Operation(summary = "Obtener productos por tienda sin paginación (para compatibilidad)")
+    @GetMapping("/tienda/{tiendaId}/all")
+    public List<ProductoDTO> obtenerPorTiendaSinPaginacion(@PathVariable Long tiendaId) {
         return productoService.obtenerPorTienda(tiendaId);
     }
 
-    // GET /api/categorias/{id}/productos
+    @Operation(summary = "Obtener productos por categoría con paginación")
     @GetMapping("/categoria/{categoriaId}")
-    public List<ProductoDTO> obtenerPorCategoria(@PathVariable Long categoriaId) {
+    public Page<ProductoDTO> obtenerPorCategoria(
+            @PathVariable Long categoriaId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String direction
+    ) {
+        Sort.Direction sortDirection = direction.equalsIgnoreCase("desc") ? 
+                Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+        return productoService.obtenerPorCategoria(categoriaId, pageable);
+    }
+    
+    @Operation(summary = "Obtener productos por categoría sin paginación (para compatibilidad)")
+    @GetMapping("/categoria/{categoriaId}/all")
+    public List<ProductoDTO> obtenerPorCategoriaSinPaginacion(@PathVariable Long categoriaId) {
         return productoService.obtenerPorCategoria(categoriaId);
     }
 

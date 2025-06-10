@@ -4,13 +4,16 @@ import com.plataforma.ecommerce.dto.PagoRequestDTO;
 import com.plataforma.ecommerce.dto.PagoResponseDTO;
 import com.plataforma.ecommerce.exception.ResourceNotFoundException;
 import com.plataforma.ecommerce.model.enums.EstadoPago;
+import com.plataforma.ecommerce.model.enums.EstadoPedido;
 import com.plataforma.ecommerce.model.enums.MetodoPago;
 import com.plataforma.ecommerce.model.Pago;
 import com.plataforma.ecommerce.model.Pedido;
+import com.plataforma.ecommerce.model.PedidoDetalle;
 import com.plataforma.ecommerce.repository.PagoRepository;
 import com.plataforma.ecommerce.repository.PedidoRepository;
 import com.plataforma.ecommerce.service.IPagoService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -26,9 +29,21 @@ public class PagoServiceImpl implements IPagoService {
     private final PedidoRepository pedidoRepository;
 
     @Override
+    @Transactional
     public PagoResponseDTO registrarPago(PagoRequestDTO dto) {
         Pedido pedido = pedidoRepository.findById(dto.getPedidoId())
                 .orElseThrow(() -> new ResourceNotFoundException("Pedido no encontrado con ID: " + dto.getPedidoId()));
+
+        // Calcular el monto total del pedido
+        BigDecimal montoTotal = pedido.getDetalles().stream()
+                .map(detalle -> detalle.getPrecioUnitario().multiply(new BigDecimal(detalle.getCantidad())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        
+        // Verificar que el monto del pago coincida con el total del pedido
+        if (montoTotal.compareTo(dto.getMonto()) != 0) {
+            throw new IllegalArgumentException(
+                "El monto del pago (" + dto.getMonto() + ") no coincide con el total del pedido (" + montoTotal + ")");
+        }
 
         Pago pago = Pago.builder()
                 .monto(dto.getMonto())
@@ -64,6 +79,7 @@ public class PagoServiceImpl implements IPagoService {
     }
 
     @Override
+    @Transactional
     public PagoResponseDTO actualizarEstadoPago(Long id, String nuevoEstado) {
         Pago pago = pagoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pago no encontrado con ID: " + id));
@@ -77,6 +93,18 @@ public class PagoServiceImpl implements IPagoService {
 
         pago.setEstado(estado);
         pagoRepository.save(pago);
+        
+        // Actualizar el estado del pedido según el estado del pago
+        Pedido pedido = pago.getPedido();
+        if (estado == EstadoPago.PAGADO) {
+            pedido.setEstado(EstadoPedido.PAGADO);
+            pedidoRepository.save(pedido);
+        } else if (estado == EstadoPago.FALLIDO) {
+            // Si el pago falla, no cambiamos el estado del pedido, se mantiene como PENDIENTE
+        } else if (estado == EstadoPago.REEMBOLSADO) {
+            pedido.setEstado(EstadoPedido.CANCELADO);
+            pedidoRepository.save(pedido);
+        }
 
         return mapToDTO(pago);
     }

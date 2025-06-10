@@ -1,5 +1,6 @@
 package com.plataforma.ecommerce.model;
 
+import com.plataforma.ecommerce.model.enums.EstadoPedido;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,10 +20,17 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pedido")
     private Long id;
+    
     private LocalDateTime fecha;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EstadoPedido estado;
+    
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
+    
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<PedidoDetalle> detalles;
 }

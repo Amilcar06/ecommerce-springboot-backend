@@ -8,4 +8,10 @@ public interface ICarritoService {
     void eliminarCarrito(Long id);
     void agregarProducto(Long carritoId, Long productoId, int cantidad);
     void eliminarProducto(Long carritoId, Long productoId);
+    
+    // Métodos específicos para operaciones por usuario
+    CarritoDTO obtenerCarritoPorUsuario(Long usuarioId);
+    void agregarProductoAlCarritoDeUsuario(Long usuarioId, Long productoId, int cantidad);
+    void eliminarProductoDelCarritoDeUsuario(Long usuarioId, Long productoId);
+    void vaciarCarritoDeUsuario(Long usuarioId);
 }

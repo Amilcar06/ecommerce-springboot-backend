@@ -1,6 +1,7 @@
 package com.plataforma.ecommerce.dto;
 
 import com.plataforma.ecommerce.model.Pedido;
+import com.plataforma.ecommerce.model.enums.EstadoPedido;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -20,6 +21,9 @@ public class PedidoDTO {
 
     @NotNull(message = "La fecha del pedido es obligatoria")
     private LocalDateTime fecha;
+    
+    @NotNull(message = "El estado del pedido es obligatorio")
+    private EstadoPedido estado;
 
     @NotNull(message = "El ID del usuario es obligatorio")
     private Long usuarioId;
@@ -32,6 +36,7 @@ public class PedidoDTO {
         return PedidoDTO.builder()
                 .id(pedido.getId())
                 .fecha(pedido.getFecha())
+                .estado(pedido.getEstado())
                 .usuarioId(pedido.getUsuario().getId())
                 .detalles(
                         pedido.getDetalles().stream()
