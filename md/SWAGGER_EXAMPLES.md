@@ -134,13 +134,3 @@ He agregado ejemplos automáticos en los DTOs principales y algunos controladore
   "roles": ["ROLE_ADMIN"]
 }
 ```
-
-## ✨ **¡Todo está listo para probar!**
-
-Los ejemplos están configurados automáticamente en Swagger. Solo necesitas:
-1. Abrir http://localhost:8081/swagger-ui.html
-2. Registrar usuarios con diferentes roles
-3. Hacer login para obtener tokens
-4. Probar los endpoints con los ejemplos predefinidos
-
-**¡Disfruta probando tu API completamente protegida por roles!** 🎉
