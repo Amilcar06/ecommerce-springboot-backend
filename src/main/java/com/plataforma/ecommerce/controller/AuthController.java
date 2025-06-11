@@ -10,6 +10,10 @@ import com.plataforma.ecommerce.repository.RoleRepository;
 import com.plataforma.ecommerce.repository.UserRepository;
 import com.plataforma.ecommerce.security.jwt.JwtUtils;
 import com.plataforma.ecommerce.service.IUserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +54,28 @@ public class AuthController {
     @Autowired
     IUserService userService;
 
+    @Operation(
+        summary = "Iniciar sesión",
+        description = "Autentica un usuario y devuelve un token JWT",
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(
+                examples = {
+                    @ExampleObject(
+                        name = "Usuario normal",
+                        value = "{\n  \"username\": \"usuario_test\",\n  \"password\": \"password123\"\n}"
+                    ),
+                    @ExampleObject(
+                        name = "Vendedor",
+                        value = "{\n  \"username\": \"vendedor_test\",\n  \"password\": \"password123\"\n}"
+                    ),
+                    @ExampleObject(
+                        name = "Administrador",
+                        value = "{\n  \"username\": \"admin_test\",\n  \"password\": \"password123\"\n}"
+                    )
+                }
+            )
+        )
+    )
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -76,6 +102,28 @@ public class AuthController {
                 new HashSet<>(roles)));
     }
 
+    @Operation(
+        summary = "Registrar nuevo usuario",
+        description = "Crea una nueva cuenta de usuario",
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(
+                examples = {
+                    @ExampleObject(
+                        name = "Usuario normal",
+                        value = "{\n  \"username\": \"usuario_test\",\n  \"email\": \"usuario@test.com\",\n  \"password\": \"password123\",\n  \"firstName\": \"Juan\",\n  \"lastName\": \"Pérez\",\n  \"roles\": [\"ROLE_USUARIO\"]\n}"
+                    ),
+                    @ExampleObject(
+                        name = "Vendedor",
+                        value = "{\n  \"username\": \"vendedor_test\",\n  \"email\": \"vendedor@test.com\",\n  \"password\": \"password123\",\n  \"firstName\": \"Carlos\",\n  \"lastName\": \"Vendedor\",\n  \"roles\": [\"ROLE_VENDEDOR\"]\n}"
+                    ),
+                    @ExampleObject(
+                        name = "Administrador",
+                        value = "{\n  \"username\": \"admin_test\",\n  \"email\": \"admin@test.com\",\n  \"password\": \"password123\",\n  \"firstName\": \"Ana\",\n  \"lastName\": \"Admin\",\n  \"roles\": [\"ROLE_ADMIN\"]\n}"
+                    )
+                }
+            )
+        )
+    )
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {

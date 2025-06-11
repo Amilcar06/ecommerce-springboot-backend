@@ -10,7 +10,20 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition(
-        info = @Info(title = "API Universidad", version = "1.0", description = "Documentación de la API"),
+        info = @Info(
+                title = "API E-commerce", 
+                version = "1.0", 
+                description = "Documentación de la API de E-commerce con protección por roles\n\n" +
+                        "**Roles disponibles:**\n" +
+                        "- **ROLE_ADMIN**: Acceso completo, puede crear tiendas y categorías\n" +
+                        "- **ROLE_VENDEDOR**: Puede gestionar productos y funciones de usuario\n" +
+                        "- **ROLE_USUARIO**: Puede usar carrito, pedidos, pagos y reseñas\n\n" +
+                        "**Para probar:**\n" +
+                        "1. Registra un usuario en `/api/auth/signup`\n" +
+                        "2. Inicia sesión en `/api/auth/login` para obtener el token\n" +
+                        "3. Haz clic en 'Authorize' y pega el token (sin 'Bearer ')\n" +
+                        "4. Prueba los endpoints según tu rol"
+        ),
         security = @SecurityRequirement(name = "bearerAuth")
 )
 @SecurityScheme(

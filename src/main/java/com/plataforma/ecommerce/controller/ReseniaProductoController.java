@@ -7,9 +7,11 @@ import com.plataforma.ecommerce.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +34,13 @@ public class ReseniaProductoController {
         return reseniaProductoService.obtenerReseniasPorProducto(productoId);
     }
 
-    @Operation(summary = "Crear una reseña para un producto")
+    @Operation(summary = "Crear una reseña para un producto", security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Reseña creada correctamente"),
             @ApiResponse(responseCode = "400", description = "Datos inválidos")
     })
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_VENDEDOR', 'ROLE_USUARIO')")
     public ReseniaProductoDTO crear(@PathVariable Long productoId, @Valid @RequestBody ReseniaProductoDTO dto) {
         // Obtener el usuario autenticado
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -53,8 +56,9 @@ public class ReseniaProductoController {
         return reseniaProductoService.crearResenia(dto);
     }
 
-    @Operation(summary = "Actualizar una reseña existente")
+    @Operation(summary = "Actualizar una reseña existente", security = @SecurityRequirement(name = "bearerAuth"))
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_VENDEDOR', 'ROLE_USUARIO')")
     public ReseniaProductoDTO actualizar(@PathVariable Long productoId, @PathVariable Long id, @Valid @RequestBody ReseniaProductoDTO dto) {
         // Obtener el usuario autenticado
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -70,8 +74,9 @@ public class ReseniaProductoController {
         return reseniaProductoService.actualizarResenia(id, dto);
     }
 
-    @Operation(summary = "Eliminar una reseña")
+    @Operation(summary = "Eliminar una reseña", security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_VENDEDOR', 'ROLE_USUARIO')")
     public void eliminar(@PathVariable Long id) {
         // Obtener el usuario autenticado
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
