@@ -96,6 +96,3 @@
 - ✅ Verificación de propiedad en reseñas (usuarios solo pueden editar/eliminar sus propias reseñas)
 - ✅ Tokens JWT para autenticación
 - ✅ Sesiones stateless
-
-## Estado: ✅ COMPLETAMENTE PROTEGIDO
-Todos los endpoints están protegidos según los roles especificados.

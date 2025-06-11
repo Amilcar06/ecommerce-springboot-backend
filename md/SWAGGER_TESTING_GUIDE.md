@@ -260,7 +260,3 @@ POST /api/auth/login
 - Revisa que el endpoint esté correctamente configurado
 
 ---
-
-## 🎉 **¡Tu API está completamente protegida!**
-
-Si todas las pruebas pasan según lo esperado, tu API tiene una protección por roles perfectamente implementada.
